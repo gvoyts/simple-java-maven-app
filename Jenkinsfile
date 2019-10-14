@@ -8,19 +8,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn --version'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh 'make check || true'
-                junit '**/target/*.xml'
-            }
-
-        }
-        stage('Deliver') {
-            steps {
-                sh './jenkins/scripts/deliver.sh'
+                sh 'mvn -B -DskipTests clean package'
             }
         }
     }
